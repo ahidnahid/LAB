@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriage Bio - Data Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header-section">
+            <h1><i class="bi bi-heart-fill"></i> Marriage Bio - Data</h1>
+            <p class="lead">Find your perfect match with our comprehensive profile form</p>
+        </div>
+        
+        <!-- Form -->
+        <form id="marriageBioForm" action="submit_form.php" method="POST" enctype="multipart/form-data" novalidate>
+            <!-- Personal Information -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="bi bi-person-circle"></i>
+                    Personal Information
+                </h2>
+                
+                <!-- Photo Upload -->
+                <div class="text-center mb-4">
+                    <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+                        <input type="file" id="photoInput" name="photoInput" accept="image/*" required>
+                        <img src="" alt="Personal Photo" class="photo-preview" id="photoPreview">
+                        <div class="photo-placeholder" id="photoPlaceholder">
+                            <i class="bi bi-camera-fill"></i>
+                            <p>Upload Your Photo</p>
+                            <small>Click to browse</small>
+                        </div>
+                    </div>
+                    <div class="invalid-feedback" id="photoError"></div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="fullName" class="form-label">Full Name *</label>
+                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                        <div class="invalid-feedback">Please enter your full name</div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="gender" class="form-label">Gender *</label>
+                        <select class="form-select" id="gender" name="gender" required>
+                            <option value="">Select your gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <div class="invalid-feedback">Please select your gender</div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="birthDate" class="form-label">Date of Birth *</label>
+                        <input type="date" class="form-control" id="birthDate" name="birthDate" required>
+                        <div class="invalid-feedback">Please select your date of birth</div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="height" class="form-label">Height (cm) *</label>
+                        <input type="number" class="form-control" id="height" name="height" min="140" max="220" placeholder="e.g., 175" required>
+                        <div class="invalid-feedback">Please enter valid height (140-220cm)</div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="weight" class="form-label">Weight (kg) *</label>
+                        <input type="number" class="form-control" id="weight" name="weight" min="40" max="150" placeholder="e.g., 65" required>
+                        <div class="invalid-feedback">Please enter valid weight (40-150kg)</div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="bloodType" class="form-label">Blood Type</label>
+                        <select class="form-select" id="bloodType" name="bloodType">
+                            <option value="">Select blood type</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="AB">AB</option>
+                            <option value="O">O</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-12 mb-4">
+                        <label for="maritalStatus" class="form-label">Marital Status *</label>
+                        <select class="form-select" id="maritalStatus" name="maritalStatus" required>
+                            <option value="">Select marital status</option>
+                            <option value="single">Single</option>
+                            <option value="divorced">Divorced</option>
+                            <option value="widowed">Widowed</option>
+                        </select>
+                        <div class="invalid-feedback">Please select your marital status</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Family Details -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="bi bi-house-heart"></i>
+                    Family Details
+                </h2>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="fatherOccupation" class="form-label">Father's Occupation</label>
+                        <input type="text" class="form-control" id="fatherOccupation" name="fatherOccupation" placeholder="e.g., Engineer">
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="motherOccupation" class="form-label">Mother's Occupation</label>
+                        <input type="text" class="form-control" id="motherOccupation" name="motherOccupation" placeholder="e.g., Teacher">
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="siblings" class="form-label">Number of Siblings</label>
+                        <input type="number" class="form-control" id="siblings" name="siblings" min="0" max="10" placeholder="e.g., 2">
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="familyType" class="form-label">Family Type</label>
+                        <select class="form-select" id="familyType" name="familyType">
+                            <option value="">Select family type</option>
+                            <option value="nuclear">Nuclear Family</option>
+                            <option value="joint">Joint Family</option>
+                            <option value="single">Single Parent Family</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-12 mb-4">
+                        <label for="familyBackground" class="form-label">Family Background</label>
+                        <textarea class="form-control" id="familyBackground" name="familyBackground" rows="3" placeholder="Tell us about your family background..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Education -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="bi bi-mortarboard-fill"></i>
+                    Education
+                </h2>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="highestEducation" class="form-label">Highest Education *</label>
+                        <select class="form-select" id="highestEducation" name="highestEducation" required>
+                            <option value="">Select highest education</option>
+                            <option value="highschool">High School</option>
+                            <option value="diploma">Diploma</option>
+                            <option value="bachelor">Bachelor's Degree</option>
+                            <option value="master">Master's Degree</option>
+                            <option value="phd">PhD</option>
+                        </select>
+                        <div class="invalid-feedback">Please select your highest education</div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="major" class="form-label">Major</label>
+                        <input type="text" class="form-control" id="major" name="major" placeholder="e.g., Computer Science">
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="university" class="form-label">University</label>
+                        <input type="text" class="form-control" id="university" name="university" placeholder="e.g., Harvard University">
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="graduationYear" class="form-label">Graduation Year</label>
+                        <input type="number" class="form-control" id="graduationYear" name="graduationYear" min="1950" max="2024" placeholder="e.g., 2020">
+                    </div>
+                    
+                    <div class="col-12 mb-4">
+                        <label for="additionalEducation" class="form-label">Additional Education</label>
+                        <textarea class="form-control" id="additionalEducation" name="additionalEducation" rows="3" placeholder="Any additional certifications or courses..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hobbies & Interests -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="bi bi-heart"></i>
+                    Hobbies & Interests
+                </h2>
+                
+                <div class="mb-4">
+                    <label class="form-label">Select your interests (multiple choices)</label>
+                    <div class="hobbies-container">
+                        <span class="hobby-tag" data-hobby="reading">
+                            <i class="bi bi-book"></i> Reading
+                        </span>
+                        <span class="hobby-tag" data-hobby="music">
+                            <i class="bi bi-music-note"></i> Music
+                        </span>
+                        <span class="hobby-tag" data-hobby="sports">
+                            <i class="bi bi-basketball"></i> Sports
+                        </span>
+                        <span class="hobby-tag" data-hobby="travel">
+                            <i class="bi bi-airplane"></i> Travel
+                        </span>
+                        <span class="hobby-tag" data-hobby="cooking">
+                            <i class="bi bi-egg-fried"></i> Cooking
+                        </span>
+                        <span class="hobby-tag" data-hobby="photography">
+                            <i class="bi bi-camera"></i> Photography
+                        </span>
+                        <span class="hobby-tag" data-hobby="gaming">
+                            <i class="bi bi-controller"></i> Gaming
+                        </span>
+                        <span class="hobby-tag" data-hobby="art">
+                            <i class="bi bi-palette"></i> Art
+                        </span>
+                        <span class="hobby-tag" data-hobby="movies">
+                            <i class="bi bi-film"></i> Movies
+                        </span>
+                        <span class="hobby-tag" data-hobby="dancing">
+                            <i class="bi bi-music-note-list"></i> Dancing
+                        </span>
+                    </div>
+                    <input type="hidden" id="selectedHobbies" name="selectedHobbies" required>
+                    <div class="invalid-feedback">Please select at least one hobby</div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="otherHobbies" class="form-label">Other Hobbies</label>
+                    <input type="text" class="form-control" id="otherHobbies" name="otherHobbies" placeholder="Enter other hobbies separated by commas">
+                </div>
+            </div>
+            
+            <!-- Occupation -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="bi bi-briefcase-fill"></i>
+                    Occupation
+                </h2>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="occupation" class="form-label">Occupation *</label>
+                        <input type="text" class="form-control" id="occupation" name="occupation" placeholder="e.g., Software Engineer" required>
+                        <div class="invalid-feedback">Please enter your occupation</div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="company" class="form-label">Company</label>
+                        <input type="text" class="form-control" id="company" name="company" placeholder="e.g., Google Inc.">
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="workExperience" class="form-label">Years of Experience</label>
+                        <input type="number" class="form-control" id="workExperience" name="workExperience" min="0" max="50" placeholder="e.g., 5">
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="annualIncome" class="form-label">Annual Income Range</label>
+                        <select class="form-select" id="annualIncome" name="annualIncome">
+                            <option value="">Select income range</option>
+                            <option value="0-5">Below $50,000</option>
+                            <option value="5-10">$50,000 - $100,000</option>
+                            <option value="10-20">$100,000 - $200,000</option>
+                            <option value="20-50">$200,000 - $500,000</option>
+                            <option value="50+">Above $500,000</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-12 mb-4">
+                        <label for="jobDescription" class="form-label">Job Description</label>
+                        <textarea class="form-control" id="jobDescription" name="jobDescription" rows="3" placeholder="Describe your role and responsibilities..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="bi bi-telephone-fill"></i>
+                    Contact Information
+                </h2>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="your.email@example.com" required>
+                        <div class="invalid-feedback">Please enter a valid email address</div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="phone" class="form-label">Phone Number *</label>
+                        <input type="tel" class="form-control" id="phone" name="phone"  required>
+                        <div class="invalid-feedback">Please enter a valid phone number</div>
+                    </div>
+                    
+                    <div class="col-12 mb-4">
+                        <label for="address" class="form-label">Current Address</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="123 Main Street, City, Country">
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="e.g., New York">
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <label for="preferredContact" class="form-label">Preferred Contact Method</label>
+                        <select class="form-select" id="preferredContact" name="preferredContact">
+                            <option value="">Select preferred method</option>
+                            <option value="email">Email</option>
+                            <option value="phone">Phone</option>
+                            <option value="wechat">WeChat</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feedback Form -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="bi bi-chat-dots-fill"></i>
+                    Tell Us More
+                </h2>
+                
+                <div class="mb-4">
+                    <label for="expectations" class="form-label">What are you looking for in a partner?</label>
+                    <textarea class="form-control" id="expectations" name="expectations" rows="4" placeholder="Describe your ideal partner..."></textarea>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="selfIntroduction" class="form-label">About Yourself *</label>
+                    <textarea class="form-control" id="selfIntroduction" name="selfIntroduction" rows="4" required placeholder="Tell us about yourself, your personality, interests, and what makes you unique..."></textarea>
+                    <div class="invalid-feedback">Please tell us about yourself</div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="additionalInfo" class="form-label">Additional Information</label>
+                    <textarea class="form-control" id="additionalInfo" name="additionalInfo" rows="3" placeholder="Anything else you'd like to share..."></textarea>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="howDidYouHear" class="form-label">How did you hear about us?</label>
+                    <select class="form-select" id="howDidYouHear" name="howDidYouHear">
+                        <option value="">Please select</option>
+                        <option value="friend">Friend Referral</option>
+                        <option value="social">Social Media</option>
+                        <option value="search">Search Engine</option>
+                        <option value="advertisement">Advertisement</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="submit-container">
+                <button type="submit" class="btn-submit">
+                    <i class="bi bi-check-circle-fill"></i> Submit Profile
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
